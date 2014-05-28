@@ -1,0 +1,21 @@
+<div class="well list-group" style="padding:0px;">
+    <div>
+        <ul class="nav">
+        {% for category in categories %}
+            <li class="{{ (category.childrens is defined) ? ' accordion-toggle' : ''}}">
+            		<label class="tree-toggle nav-header list-group-item" label-default="" >
+                 		{{ (category.translations[app.request.locale].name is defined) ? category.translations[app.request.locale].name : category.translations['fr'].name}}
+                 	</label>
+                {% if (category.childrens) %}
+	                <ul class="nav tree">
+	                	{% for children in category.childrens %}
+	                    	<li><a  href="#">{{ (children.translations[app.request.locale].name is defined) ? children.translations[app.request.locale].name : children.translations['fr'].name}}</a>
+	                    	</li>
+                    	{% endfor %}
+	               	</ul>
+	             {% endif %}
+            </li>
+            {% endfor %}
+         </ul>
+    </div>
+</div>

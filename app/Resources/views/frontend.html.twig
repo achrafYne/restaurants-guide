@@ -1,0 +1,116 @@
+{% extends '::base.html.twig' %}
+{% set currentCityId = app.request.attributes.get('city_id', 0) %}
+{% set _locale = app.request.attributes.get('_locale', 'fr') %}
+{% set currentCategory = app.request.attributes.get('category', '') %}
+{% block stylesheets %}
+ 	<!--  CSS -->
+ 	<!--I Use in this test bootstrap 3-->
+      <link rel="stylesheet" 	href="{{ asset('bundles/sahadinarestaurant/css/bootstrap.min.css') }}"  />
+      <link rel="stylesheet" 	href="{{ asset('bundles/sahadinarestaurant/css/sahadina.css') }}"  />
+  	<!-- Template CSS -->
+{% endblock %}
+{% block body %}
+ 	<nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" id="site-logo" href="{{ path('sahadina_locale_home', { '_locale': _locale})}}">
+               		 <img src="{{ asset('bundles/sahadinarestaurant/images/logo.png') }}" alt="" /> 
+                </a>
+            </div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">{{ "A propos" | trans }}</a>  </li>
+                    <li><a href="#">{{ "Services" | trans }}</a> </li>
+                    <li><a href="#">{{ "Contact"  | trans }}</a> </li>
+                </ul>
+                <ul class="nav nav-lng pull-right">
+	                <li class="">
+		               	<a href="{{path('sahadina_locale_home', { '_locale': _locale})}}" class="btn">
+                			<img src="{{ asset('bundles/sahadinarestaurant/images/flags/flag_fr.jpg') }}" alt="Francais" />
+	                	</a>
+	                 </li>
+	                <li class="">
+	                	<a href="{{path('sahadina_locale_home', { '_locale': "en"})}}" class="btn">
+                			<img src="{{ asset('bundles/sahadinarestaurant/images/flags/flag_en.jpg') }}" alt="Englais" />
+	                	</a>
+	                 </li>
+	                <li class="">
+	                	<a href="{{path('sahadina_locale_home', { '_locale': "es"})}}" class="btn">
+                			<img src="{{ asset('bundles/sahadinarestaurant/images/flags/flag_es.jpg') }}" alt="ESP" />
+	                	</a>
+	                </li>
+	                {% if not is_granted('ROLE_USER') %}
+                        <li><a  href="#">{{ "Connexion" | trans }}</a></li>
+                        <li class="divider-vertical"></li>
+                    {% else %}
+                        <li><a  href="#" >{{ "Mon Profil" | trans }}</a> </li> 
+                    {% endif %}
+               </ul>
+            </div>
+            <!-- navbar-collapse -->
+        </div>
+        <!-- container -->
+    </nav>
+    <div class="container">
+    	<!-- Flash Messenger-->
+	    {% for flashMessage in app.session.flashbag.get('notice') %}
+			<div class="alert span12">
+	           	<button data-dismiss="alert" class="close" type="button">×</button>
+	            {{ flashMessage }}
+	     	</div>
+		{% endfor %}
+	    {% for flashMessage in app.session.flashbag.get('error') %}
+	 	 <div class="alert alert-error span12">
+	           <button data-dismiss="alert" class="close" type="button">×</button>
+	            {{ flashMessage }}
+	     </div>
+		{% endfor %}
+		{% for flashMessage in app.session.flashbag.get('info') %}
+			<div class="alert alert-success span12">
+	           <button data-dismiss="alert" class="close" type="button">×</button>
+	            {{ flashMessage }}
+	     	</div>
+		{% endfor %}
+		<!-- Flash Messenger-->
+    	<div class="row">
+    	 	<!-- Aside -->
+    		<div class="col-md-3" id="cities-filter">
+                {{ render(controller('SahadinaGeoBundle:Default:citiesList', { 'city_id': currentCityId })) }}
+                {{ render(controller('SahadinaCategoryBundle:Default:categoriesList', { 'category': currentCategory })) }}
+            </div>
+            <!-- Aside -->
+            <div class="col-md-9">
+            <!-- Content -->
+				<div class="row" id="site-content">
+					{% block content %}{% endblock %}
+				</div>
+				 {% if  block('id') in ['site_home', 'geo_home','category_home'] %}
+					{% include 'SahadinaGeoBundle:Default:includes/pagination.html.twig' %}
+				 {% endif %}
+				<!-- Content -->
+            </div>
+         </div>
+    </div>
+    <div class="container" id="footer">
+		{% include ':includes:footer.html.twig' %}
+	</div>
+	{% block javascripts %}
+		<!--  Javascripts -->
+	 	<script src="{{ asset('bundles/sahadinarestaurant/js/jquery.js')}}"></script>
+	    <script src="{{ asset('bundles/sahadinarestaurant/js/bootstrap.min.js')}}"></script>
+	    <script type='text/javascript'>
+        $(document).ready(function() {
+            
+           $('.tree-toggle').each(function () { $(this).parent().children('ul.tree').hide(300);})
+           $('.tree-toggle').click(function () {$(this).next('ul.tree').show(300)});
+        });
+     </script>
+	    <!--  Javascripts -->
+	{% endblock %}
+{% endblock %}

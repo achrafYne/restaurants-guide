@@ -1,0 +1,18 @@
+liip_imagine:
+    filter_sets:
+        small:
+            quality: 100
+            filters:
+                thumbnail: { size: [180, 90], mode: outbound }
+        medium:
+            quality: 100
+            filters:
+                thumbnail: { size: [255, 255], mode: outbound }
+        big:
+            quality: 100
+            filters:
+                thumbnail: { size: [500, 250], mode: outbound }
+        slider:
+            quality: 100
+            filters:
+                thumbnail: { size: [2200, 900], mode: outbound }

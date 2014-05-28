@@ -1,0 +1,9 @@
+sahadina_restaurant_fiche:
+    pattern:  /{_locale}/{city}/{url}-{id}.{_format}
+    defaults: {_controller: "SahadinaRestaurantBundle:Default:index",_format: html}
+    requirements:
+        lng:  en|fr
+        city: "[a-zA-Z0-9-_/]+"
+        url: "[a-zA-Z0-9-_/]+"
+        _format:  "html|rss"
+        id: \d+

@@ -1,0 +1,81 @@
+#Sahadina Routing
+# route de la home page
+#sahadina_home:
+    #pattern:  /{_locale}/
+    #defaults: { _controller: "SahadinaGeoBundle:Default:home", _locale: "%locale%" }
+    #requirements:
+        #_locale: en|es|fr
+# route de site sans paramètres
+# Ce chemin est facultatif, car l'application peut bien fonctionner
+# recois les  valeurs par défaut    
+#_sahadina:
+     #pattern:  /
+     #defaults: { _controller: "FrameworkBundle:Redirect:redirect", route: sahadina_home}
+#_sahadina_locale:
+     #pattern:  /{_locale}/
+     #defaults: { _controller: "FrameworkBundle:Redirect:redirect", route: sahadina_home} 
+sahadina_geo:
+    resource: "@SahadinaGeoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#Category Routing                 
+sahadina_category:
+    resource: "@SahadinaCategoryBundle/Resources/config/routing.yml"
+    prefix:   /
+        
+#Restaurant Routing
+sahadina_restaurant:
+    resource: "@SahadinaRestaurantBundle/Resources/config/routing.yml"
+    prefix:   /
+        
+#User Routing        
+sahadina_user:
+    resource: "@SahadinaUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# FOS 
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+ 
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+ 
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+ 
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+ 
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /change-password
+    
+#Admin 
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+ 
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+ 
+soanata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+#Media Bundle
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media 
+
+#Crop image
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

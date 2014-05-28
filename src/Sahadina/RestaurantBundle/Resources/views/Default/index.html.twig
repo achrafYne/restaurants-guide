@@ -1,0 +1,92 @@
+{% extends '::frontend.html.twig' %}
+{% block id 'restaurant_fiche' %}
+{% block content %}
+<div class="container">
+    <div class="col-md-9">
+        {% set  name= (restaurant.translations[app.request.locale].name is defined ) ? restaurant.translations[app.request.locale].name :restaurant.translations['fr'].name %}
+		{% set  description= (restaurant.translations[app.request.locale].description is defined ) ? restaurant.translations[app.request.locale].description :restaurant.translations['fr'].description %}
+		<div class="container">
+            <div class="menu row">
+                <div class="product col-sm-6">
+                   {% if restaurant.logo.providerName is defined  %}
+			    		{% set img_url = media_public_url(restaurant.logo, 'reference') %}   
+			    		<img class="img-responsive" src="{{ img_url | imagine_filter('big') }}" alt="" />
+			        {% else %}
+	                	<img class="img-responsive" src="{{ asset('bundles/sahadinarestaurant/images/no-image.jpg') }}" alt="" />
+	             	{% endif %}	
+                  <i class="btn btn-product fa fa-star"></i>
+					<hr>
+                    <h2>{{ name }}</h2>
+                    <p>{{ description }}</p>
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#reviews">{{ "Avis" | trans}}</a></li>
+                        <li><a data-toggle="tab" href="#tarifs">{{ "Tarifs" | trans}}</a></li>
+                        <li><a data-toggle="tab" href="#contact">{{ "Contact" | trans}}</a></li>
+                        <li><a data-toggle="tab" href="#social_network">{{"Reseaux Socieaux" | trans }}</a></li>
+                    </ul>
+                  	<div class="tab-content">
+                      <div class="tab-pane active" id="reviews">
+                        <h4>{{ "Poster votre avis" | trans }}</h4>
+                        <ul class="list-unstyled">
+                        </ul>
+                       </div>
+                      <div class="tab-pane" id="tarifs"><h4>{{ restaurant.minPrice }} - {{ restaurant.maxPrice }}  {{ restaurant.currency }}</h4></div>
+                      <div class="tab-pane" id="contact">
+	                      	<ul class="list-unstyled">
+	                      	{% if restaurant.email  is not empty  %}
+		                      	 <li class="clearfix" id="resto-phone">
+		                      	 	<h4>{{ "Email" | trans }}</h4>
+		                      	 	{{ restaurant.email}}
+		                      	 </li>
+	                      	 {% endif %}
+	                      	 {% if restaurant.telephone  is not empty  %}
+		                      	 <li class="clearfix" id="resto-phone">
+		                      	 	<h4>{{ "Telephone" | trans }}</h4>
+		                      	 	{{ restaurant.telephone}}
+		                      	 </li>
+	                      	 {% endif %}
+	                      	 {% if restaurant.siteWeb  is not empty  %}
+		                      	 <li class="clearfix" id="resto-siteWeb">
+		                      	 	<h4>{{ "Site Web" | trans }}</h4>
+		                      	 	<a href="{{restaurant.siteWeb}}">{{ restaurant.siteWeb}}</a>
+		                      	 </li>
+	                      	 {% endif %}
+	                      	 {% if restaurant.address  is not empty  %}
+		                      	 <li class="clearfix" id="resto-address">
+		                      		 <h4>{{ "Adresse" | trans }}</h4>
+		                      	 	{{restaurant.address}} , {{restaurant.zipCode}} ,  {{restaurant.city.translations['fr'].name  }}
+		                      	 </li>
+	                      	 {% endif %}
+	                      	</ul>
+                      	</div>
+                      	<div class="tab-pane" id="social_network">
+                      		<ul class="list-unstyled">
+	                      		{% if restaurant.facebook  is not empty  %}
+	                      			<h4>{{ "Facebook" | trans }}</h4>
+			                      	 <li class="clearfix">
+			                      	 	<a href="{{  restaurant.facebook}}">{{  restaurant.facebook}}</a>
+			                      	 </li>
+		                      	 {% endif %}
+		                      	 {% if restaurant.youtube  is not empty  %}
+			                      	 <li class="clearfix">
+			                      	  	<h4>{{ "Youtube" | trans }}</h4>
+			                      	 	<a href="{{  restaurant.youtube}}">{{  restaurant.youtube}}</a>
+			                      	 </li>
+		                      	 {% endif %}
+		                      	 {% if restaurant.twitter  is not empty  %}
+			                      	 <li class="clearfix">
+			                      		 <h4>{{ "Twitter" | trans }}</h4>
+			                      	 	<a href="{{  restaurant.twitter}}">{{  restaurant.twitter}}</a>
+			                      	 </li>
+		                      	 {% endif %}
+	                      	 </ul>
+                      	</div>
+                     </div>
+                  </div>
+             </div>
+            <!--/row-->
+        </div>
+        <!--/container-->
+    </div>
+</div>
+{% endblock %}

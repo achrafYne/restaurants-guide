@@ -1,0 +1,24 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}une erreur est survenue{% endblock %}
+
+{% block id 'error' %}
+
+{% block article %}
+      <div class="container">
+      {% if exception.message %}
+        <h1 class="title-hero">{{ exception.message }}</h1>
+    {% else %}
+        <h1 style="font-size:30px;">Désolé, nous n'avons pas trouvé la page demandée <span>(error 404)</span></h1>
+    {% endif %}
+	    <h1>Essayez de rafraîchir la page dans un instant et sûrement
+         Vous pouvez accéder à la page demandée. Si l'erreur persiste,
+         S'il vous plaît nous conseillez-vous dans la direction contact@sahadina.com</h1>
+        <div class="gap gap-small"></div><a href="{{ path('sahadina_home', { '_locale': locale })}}" class="btn btn-primary btn-mega">Retour à l'accueil</a>
+        <div class="gap"></div>
+    </div>
+   
+{% endblock %}
+
+
+   

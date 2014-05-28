@@ -1,0 +1,51 @@
+{% extends '::frontend.html.twig' %}
+{% block id 'site_home' %}
+{% block content %}
+	{% if  restaurants is not empty %}
+		{% for restaurant in restaurants %}
+			{% set  _cityUrl= (restaurant.city.translations[app.request.locale].url is defined ) ? restaurant.city.translations[app.request.locale].url :restaurant.city.translations['fr'].url %}
+			{% set  _url	= (restaurant.translations[app.request.locale].url  is defined  )  	? restaurant.translations[app.request.locale].url :restaurant.translations['fr'].url   %}
+			<div class="col-sm-4 col-lg-4 col-md-4">
+			    <div class="thumbnail">
+			    	<a href="{{path('sahadina_restaurant_fiche', { '_locale': app.request.locale,'city':_cityUrl,'url':_url,'id':restaurant.id,'_format':'html'})}}.html">
+				    	{% if restaurant.logo.providerName is defined  %}
+				    	{% set img_url = media_public_url(restaurant.logo, 'reference') %}   
+				    		<img src="{{ img_url | imagine_filter('medium') }}" alt="" />
+				        {% else %}
+			                <img src="{{ asset('bundles/sahadinarestaurant/images/no-image.jpg') }}" alt="" />
+		             	{% endif %}	
+		             </a>
+			        <div class="caption">
+			            <h5 class="pull-right">{{restaurant.minPrice }} - {{restaurant.maxPrice }} {{restaurant.currency }}</h5>
+						 <h4><a href="{{path('sahadina_restaurant_fiche', { '_locale': app.request.locale,'city':_cityUrl,'url':_url,'id':restaurant.id,'_format':'html'})}}.html">{{restaurant.name }}</a>
+			            </h4>
+			            <p>
+			           		 {% if restaurant.translations[locale].description is defined  %}
+		                  		<p>	{{ restaurant.translations[locale].description | truncate(80, true, '...') }}
+		                  	{% else %}
+			                	 <span style="color: red">{{ "Pas de traduction pour la description" | trans }}  {{ locale }}</span>
+		                  	{% endif %}
+			            </p>
+			            <p class="list">
+		                     {% for category in restaurant.categories %}
+			                    - <a href="#">{{category.name }}</a>
+		                   	{% endfor %}
+		                </p>
+			        </div>
+			        <div class="ratings">
+			            <p class="pull-right">Note</p>
+			            <p>
+			                <span class="glyphicon glyphicon-star"></span>
+			                <span class="glyphicon glyphicon-star"></span>
+			                <span class="glyphicon glyphicon-star"></span>
+			                <span class="glyphicon glyphicon-star"></span>
+			                <span class="glyphicon glyphicon-star"></span>
+			            </p>
+			        </div>
+			    </div>
+			</div>
+		{% endfor %}
+		{% else %}
+		{% include 'SahadinaRestaurantBundle:Default:includes/empty_result.html.twig' %}
+		{% endif %}
+{% endblock %}

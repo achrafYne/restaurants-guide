@@ -1,0 +1,25 @@
+sahadina_welcom:
+    pattern:  /
+    defaults: { _controller: "SahadinaGeoBundle:Default:index" }
+    
+sahadina_locale_home:
+    pattern:  /{_locale}/
+    defaults: { _controller: "SahadinaGeoBundle:Default:index", _locale: _locale }
+    requirements:
+        _locale: en|es|fr 
+# route de la home  avec pagination
+sahadina_home_pagination:
+    pattern:  /{_locale}/{page}
+    defaults: { _controller: "SahadinaGeoBundle:Default:index", _locale: _locale,page: page}
+    requirements:
+        _locale: en|es|fr 
+        page: \d+
+# route de la home Ville avec pagination
+sahadina_city_homepage:
+    pattern:  /{_locale}/{city}-{id}/{page}
+    defaults: {_controller: "SahadinaGeoBundle:City:index",_format: html}
+    requirements:
+        _locale:  en|es|fr
+        city: "[a-zA-Z0-9-_/]+"
+        page: \d+
+        id: \d+        

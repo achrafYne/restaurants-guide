@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Sahadina\CategoryBundle\Entity\Category" table="category" repository-class="Sahadina\CategoryBundle\Repository\CategoryRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field 			name="level"		type="integer" 		nullable="true"  column="level"/>
+    <many-to-many   field="restaurants" target-entity="Sahadina\RestaurantBundle\Entity\Restaurant"  mapped-by="categories" />
+   	<many-to-one 	field="parent"		target-entity="Sahadina\CategoryBundle\Entity\Category"  inversed-by="childrens">
+            <join-column name="parent_id" referenced-column-name="id" on-delete="CASCADE"/>
+   	</many-to-one>
+	<one-to-many field="childrens" target-entity="Sahadina\CategoryBundle\Entity\Category" mapped-by="parent">
+        <order-by>
+            <order-by-field name="level" direction="ASC" />
+        </order-by>
+    </one-to-many>
+   </entity>
+</doctrine-mapping>

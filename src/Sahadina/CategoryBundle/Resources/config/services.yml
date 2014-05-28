@@ -1,0 +1,7 @@
+parameters:
+#    sahadina_category.example.class: Sahadina\CategoryBundle\Example
+
+services:
+#    sahadina_category.example:
+#        class: %sahadina_category.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

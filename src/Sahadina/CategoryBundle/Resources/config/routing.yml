@@ -1,0 +1,3 @@
+sahadina_category_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: "SahadinaCategoryBundle:Default:index" }

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Connexion</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Villes</source>
+                <target>Cities</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Ville</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Guide de Restaurants</source>
+                <target>Restaurants guide</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>A propos</source>
+                <target>About</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Services</source>
+                <target>Services</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Contact</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Restaurants</source>
+                <target>Restaurantes</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Pas de traduction pour la description</source>
+                <target>No translation for the description</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Poster votre avis</source>
+                <target>Post your review</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Reseaux Socieaux</source>
+                <target>Social Network</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Tarifs</source>
+                <target>Rates</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Avis</source>
+                <target>Review</target>
+            </trans-unit>
+             <trans-unit id="14">
+                <source>Site Web</source>
+                <target>Website</target>
+            </trans-unit>
+          </body>
+    </file>
+</xliff>

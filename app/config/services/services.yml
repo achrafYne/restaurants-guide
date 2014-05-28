@@ -1,0 +1,43 @@
+#sahadina service
+services:
+    #Admin Services
+    sahadina.admin.category:
+        class: Sahadina\CategoryBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sahadina, label: Categories }
+        arguments: [null, Sahadina\CategoryBundle\Entity\Category, "SahadinaCategoryBundle:CategoryAdmin"]
+   
+    sahadina.admin.restaurant:
+        class: Sahadina\RestaurantBundle\Admin\RestaurantAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sahadina, label: Restaurants }
+        arguments: [null, Sahadina\RestaurantBundle\Entity\Restaurant, "SahadinaRestaurantBundle:RestaurantAdmin"]
+    
+    sahadina.admin.city:
+        class: Sahadina\GeoBundle\Admin\CityAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sahadina, label: Villes }
+        arguments: [null, Sahadina\GeoBundle\Entity\City, "SahadinaGeoBundle:CityAdmin"]
+   
+    sahadina.user.context:
+        class: Sahadina\RestaurantBundle\Entity\Restaurant
+        tags:
+        - { name: doctrine.event_listener, event: setPreUpdateValues }
+        arguments: ['@service_container']
+#Twig Utilities Services
+    #Text 
+    twig.extension.text:
+         class: Twig_Extensions_Extension_Text
+         tags:
+         - { name: twig.extension }
+    #Bebug 
+    twig.extension.debug:
+        class:        Twig_Extension_Debug
+        tags:
+        - { name: 'twig.extension' } 
+    #Media     
+    twig.extension.media:
+        class: Sahadina\RestaurantBundle\Twig\MediaExtension
+        arguments: ['@service_container', '@security.context']
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Sahadina\RestaurantBundle\Entity\Restaurant" table="restaurant" repository-class="Sahadina\RestaurantBundle\Repository\RestaurantRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="address"			type="text" 	nullable="false" 	column="address"/>
+    <field name="zipCode" 			type="string" 	nullable="false" 	column="zip_code" 	 length="50"/>
+    <field name="telephone" 		type="string" 	nullable="true" 	column="telephone" 	 length="50"/>
+    <field name="email" 			type="string" 	nullable="true" 	column="email" 	 	 length="50"/>
+    <field name="siteWeb" 			type="string" 	nullable="true" 	column="site_web" 	 length="50"/>
+    <field name="isActivated" 		type="boolean" 	nullable="true" 	column="is_activated" />
+    <field name="longitude" 		type="string" 	nullable="true" 	column="longitude" 	 length="255"/>
+    <field name="latitude" 			type="string" 	nullable="true" 	column="latitude"	 length="255"/>
+    <field name="createdAt" 		type="datetime" nullable="true"		column="created_at"/>
+    <field name="updatedAt" 		type="datetime" nullable="true"		column="updated_at"/>
+    <field name="currency" 			type="string" 	nullable="true" 	column="currency"/>
+    <field name="minPrice" 			type="float" 	nullable="true" 	column="min_price"/>
+    <field name="maxPrice" 			type="float" 	nullable="true" 	column="max_price"/>
+    <field name="facebook" 			type="string" 	nullable="true" 	column="facebook" length="100"/>
+    <field name="twitter" 			type="string" 	nullable="true" 	column="twitter"  length="100"/>
+    <field name="youtube" 			type="string" 	nullable="true" 	column="youtube"  length="100"/>
+    <many-to-one field="city"       target-entity="Sahadina\GeoBundle\Entity\City" 	 inversed-by="restaurants" >
+      <join-columns>
+        <join-column name="city_id" 	referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="categories" 		target-entity="Sahadina\CategoryBundle\Entity\Category" 	nullable="true"	inversed-by="restaurants" >
+      <join-table name="restaurant_category">
+        <join-columns>
+          <join-column name="restaurant_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="category_id" 	referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-one field="updatedBy"  target-entity="Application\Sonata\UserBundle\Entity\User" nullable="true" inversed-by="restaurants">
+      <join-columns>
+        <join-column name="updated_by_user_id"  referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="createdBy"  target-entity="Application\Sonata\UserBundle\Entity\User" nullable="true" inversed-by="restaurants">
+      <join-columns>
+        <join-column name="created_by_user_id"  referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <one-to-one   field="logo"    target-entity="Application\Sonata\MediaBundle\Entity\Media"  mapped-by="restaurant" >
+    	<cascade>
+        		<cascade-all/>
+    	</cascade>
+    	<orphan-removal>true</orphan-removal>
+    </one-to-one>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist"     method="setPrePersistValues"/>
+      <lifecycle-callback type="preUpdate"      method="setPreUpdateValues"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

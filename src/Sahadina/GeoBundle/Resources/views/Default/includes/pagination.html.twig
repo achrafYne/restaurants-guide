@@ -1,0 +1,25 @@
+ {% if  restaurants is not empty %}
+	 <div class="pagination-large">
+	  	{% if last_page > 1 %}
+		  <ul class="pagination" >
+			  	<li class="disabled"><a href="#">&laquo;</a></li>
+			  	{% for page in 1..last_page %}
+			  		{% if page == current_page %}
+				  		<li class="disabled">
+				  			<a href="">{{ page }}</a>
+				  		</li>
+			  		{% else %}
+			  			<li>
+				  			<a href="{{ path('sahadina_home_pagination', {'_locale':app.request.locale,'page':page}) }}">{{ page }}</a>
+				  		</li>
+			  		{% endif %}
+			  	{% endfor %}
+		  		<li><a href="#">»</a></li>
+	  		</ul>	
+		{% endif %}
+			<div class="pagination_desc"><strong>{{total}}</strong> {{"Restaurants" | trans }} 
+		 		{% if last_page > 1 %}
+		 			- page <strong>{{ current_page }}/{{ last_page }}</strong> {% endif %}
+		 	</div>
+		</div>
+		{% endif %}

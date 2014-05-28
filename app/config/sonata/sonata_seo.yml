@@ -1,0 +1,19 @@
+#Seo
+sonata_seo:
+    default: sonata.seo.page.default
+    encoding: UTF-8
+    page:
+         title: Sahadina Le guide des restaurants 
+         metas:
+             name:
+                 keywords:    Restaurant,gastronomie, Fast food
+                 description: Annuaire des restaurants
+                 robots:  index, follow
+             property:
+                 'og:site_name': Sahadina le guide des restaurants
+                 'og:description': Annuaire des restaurants
+ 
+             http-equiv:
+                 'Content-Type':         text/html; charset=utf-8
+         head:
+             'xmlns':              http://www.w3.org/1999/xhtml

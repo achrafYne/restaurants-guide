@@ -16,7 +16,40 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-        );
+            new Sahadina\RestaurantBundle\SahadinaRestaurantBundle(),
+            new Sahadina\CategoryBundle\SahadinaCategoryBundle(),
+            new Sahadina\GeoBundle\SahadinaGeoBundle(),
+            new Sahadina\UserBundle\SahadinaUserBundle(),
+        	/**
+        	 * Sonata Bundle
+        	 */
+        	new Sonata\CoreBundle\SonataCoreBundle(),
+        	new Sonata\BlockBundle\SonataBlockBundle(),
+        	new Sonata\jQueryBundle\SonatajQueryBundle(),
+        	new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+        	new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+        	new Sonata\AdminBundle\SonataAdminBundle(),
+        	new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+        		
+        	/**
+        	* FOS Bundle
+        	*/
+        	new FOS\UserBundle\FOSUserBundle(),
+        	new Sonata\UserBundle\SonataUserBundle(),
+        	new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+        	
+        	/**translate*/
+        	new A2lix\I18nDoctrineBundle\A2lixI18nDoctrineBundle(),
+        	new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
+        	new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+        	/**Media Bundle*/
+        	new Sonata\MediaBundle\SonataMediaBundle(),
+        	new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+        	/**Seo Bundle**/
+        	new Sonata\SeoBundle\SonataSeoBundle(),
+        		/**Crop image**/
+        	new Liip\ImagineBundle\LiipImagineBundle(),
+         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();

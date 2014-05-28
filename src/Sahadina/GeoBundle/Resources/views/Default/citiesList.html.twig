@@ -1,0 +1,12 @@
+<div class="list-group">
+<a class="list-group-item active" href="#">Villes</a>
+{% for city in cities %}
+	<a {{ 2 == city.id ? ' class="list-group-item active"' : ' class="list-group-item"' }} href="#">
+		{% if city.translations[app.request.locale].name  is defined %} 
+			{{city.translations[app.request.locale].name }}
+		{% else %}
+			{{city.translations['fr'].name }}
+		{% endif %}
+	</a>
+ {% endfor %}
+</div>

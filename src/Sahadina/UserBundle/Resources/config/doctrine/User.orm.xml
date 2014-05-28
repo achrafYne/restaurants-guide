@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Sahadina\UserBundle\Entity\User" table="user"  repository-class="Sahadina\UserBundle\Repository\UserRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="lastName"     			type="string"   nullable="true"     column="last_name"  length="100"/>
+    <field name="firstName"     		type="string"   nullable="true"     column="first_name"	length="100"/>
+    <field name="address"				type="text" 	nullable="false" 	column="address"/>
+    <field name="zipCode" 				type="string" 	nullable="false" 	column="zip_code" 	 	length="50"/>
+    <field name="telephone" 			type="string" 	nullable="true" 	column="telephone" 	 	length="50"/>
+    <field name="email" 				type="string" 	nullable="true" 	column="email" 	 		length="50"/>
+    <field name="url" 					type="string" 	nullable="true" 	column="url" 		 	length="255"/>
+    <field name="logo" 					type="string" 	nullable="true" 	column="logo" 		 	length="255"/>
+    <field name="createdAt"     		type="datetime" nullable="true"     column="created_at"/>
+    <field name="updatedAt"     		type="datetime" nullable="true"     column="updated_at"/>
+    <field name="facebook"     		    type="string" 	nullable="true"     column="facebook" 		length="255"/>
+    <field name="twitter"     		    type="string" 	nullable="true"     column="twitter" 		length="255"/>
+    <field name="gplus"     		    type="string" 	nullable="true"     column="gplus"			length="255"/>
+	<many-to-one field="city"          	target-entity="Sahadina\GeoBundle\Entity\City">
+      <join-columns>
+        <join-column name="city_id" 		referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist"     method="setCreatedAtValue"/>
+      <lifecycle-callback type="preUpdate"      method="setUpdatedAtValue"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>
